@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class Navi extends Component {
   render() {
     return (
-      <div>Navi Comp.</div>
-    )
+      <div>
+        <h1>Navigation Pane</h1>
+      </div>
+    );
   }
 }
