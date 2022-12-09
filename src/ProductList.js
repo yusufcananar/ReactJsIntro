@@ -1,0 +1,13 @@
+import React, { Component } from "react";
+
+export default class ProductList extends Component {
+  
+  //this.props.xxx.xxx Category Listte oluşturulan ctor ile aynı işleve sahip yani ctor yazmaya gerek yok.
+  render() {
+    return (
+      <div>
+        <h3>{this.props.info.title}</h3> 
+      </div>
+    );
+  }
+}
