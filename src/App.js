@@ -8,10 +8,27 @@ export default class App extends Component {
   productInfo = { title: "Product List" };
   categoryInfo = { title: "Category List" };
 
-  state = { currentCategory: "" };
+  state = { currentCategory: "", products: [] };
 
   changeCategory = (category) => {
     this.setState({ currentCategory: category.categoryName });
+    console.log(category)
+    this.getProducts(category.id);
+  };
+
+  getProducts = (categoryId) => {
+
+    let url = "http://localhost:3000/products";
+    if(categoryId){
+      url += "?categoryId=" + categoryId;
+    }
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => this.setState({ products: data }));
+  };
+  componentDidMount = () => {
+    this.getProducts();
   };
 
   render() {
@@ -30,7 +47,11 @@ export default class App extends Component {
               />
             </Col>
             <Col xs="9">
-              <ProductList currentCategory={this.state.currentCategory} info={this.productInfo} />
+              <ProductList
+                products={this.state.products}
+                currentCategory={this.state.currentCategory}
+                info={this.productInfo}
+              />
             </Col>
           </Row>
         </Container>
