@@ -3,6 +3,7 @@ import { Col, Container, Row } from "reactstrap";
 import CategoryList from "./CategoryList";
 import Navi from "./Navi";
 import ProductList from "./ProductList";
+import alertify from "alertifyjs";
 
 export default class App extends Component {
   productInfo = { title: "Product List" };
@@ -41,6 +42,7 @@ export default class App extends Component {
     }
     
     this.setState({cart:newCart});
+    alertify.success(product.productName + " added to cart!", 1);
   }
 
   removeFromCart = (product) => {
