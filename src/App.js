@@ -8,18 +8,17 @@ export default class App extends Component {
   productInfo = { title: "Product List" };
   categoryInfo = { title: "Category List" };
 
-  state = { currentCategory: "", products: [] };
+  state = { currentCategory: "", products: [], cart : [] };
 
   changeCategory = (category) => {
     this.setState({ currentCategory: category.categoryName });
-    console.log(category)
+    console.log(category);
     this.getProducts(category.id);
   };
 
   getProducts = (categoryId) => {
-
     let url = "http://localhost:3000/products";
-    if(categoryId){
+    if (categoryId) {
       url += "?categoryId=" + categoryId;
     }
 
@@ -31,13 +30,24 @@ export default class App extends Component {
     this.getProducts();
   };
 
+  addToCart = (product) =>{
+    let newCart = this.state.cart;
+    var addedItem = newCart.find(c=>c.product.id === product.id);
+    console.log(newCart)
+    if(addedItem){
+      addedItem.quantity +=1;
+    }else{
+      newCart.push({product:product, quantity:1});
+    }
+    
+    this.setState({cart:newCart});
+  }
+
   render() {
     return (
       <div>
         <Container>
-          <Row>
-            <Navi />
-          </Row>
+          <Navi cart={this.state.cart}/>
           <Row>
             <Col xs="3">
               <CategoryList
@@ -48,6 +58,7 @@ export default class App extends Component {
             </Col>
             <Col xs="9">
               <ProductList
+                addToCart={this.addToCart}
                 products={this.state.products}
                 currentCategory={this.state.currentCategory}
                 info={this.productInfo}
