@@ -23,22 +23,22 @@ export default class CategoryList extends Component {
   // }
 
   state = {
-    categories: []
+    categories: [],
   };
 
-  changeCategory = (category) =>{
-    this.setState({currentCategory: category.categoryName})
-  }
+  changeCategory = (category) => {
+    this.setState({ currentCategory: category.categoryName });
+  };
 
-  getCategories = () =>{
+  getCategories = () => {
     fetch("http://localhost:3000/categories")
-    .then(response=>response.json())
-    .then(data=>this.setState({categories:data}))
-  }
+      .then((response) => response.json())
+      .then((data) => this.setState({ categories: data }));
+  };
 
-  componentDidMount = ()=>{
-    this.getCategories()
-  }
+  componentDidMount = () => {
+    this.getCategories();
+  };
 
   render() {
     return (
@@ -47,11 +47,21 @@ export default class CategoryList extends Component {
         <ListGroup>
           {//JS çalıştıracağım için bu parantezi açtım.
           this.state.categories.map((category) => (
-            <ListGroupItem active={category.categoryName===this.props.currentCategory?true:false}
+            <ListGroupItem
+              active={
+                // @ts-ignore
+                category.categoryName === this.props.currentCategory
+                  ? true
+                  : false
+              }
               onClick={() => this.props.changeCategory(category)}
+              // @ts-ignore
               key={category.id}
             >
-              {category.categoryName}
+              {
+                // @ts-ignore
+                category.categoryName
+              }
             </ListGroupItem>
           ))}
         </ListGroup>
