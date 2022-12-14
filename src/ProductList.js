@@ -5,7 +5,6 @@ export default class ProductList extends Component {
   //this.props.xxx.xxx Category Listte oluşturulan ctor ile aynı işleve sahip yani ctor yazmaya gerek yok.
   //aynı durum state için de geçerli
 
-
   render() {
     return (
       <div>
@@ -32,7 +31,14 @@ export default class ProductList extends Component {
                 <td>{product.unitPrice}</td>
                 <td>{product.unitsInStock}</td>
                 <td>{product.quantityPerUnit}</td>
-                <td><Button onClick={()=>this.props.addToCart(product)} color="info">Add To Cart</Button></td>
+                <td>
+                  <Button
+                    onClick={() => this.props.addToCart(product)}
+                    color="info"
+                  >
+                    Add To Cart
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
